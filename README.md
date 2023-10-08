@@ -12,3 +12,11 @@
 
 *You may see a minikube warning message about it not being able to locate the docker endpoint. Run `docker context ls` to see the available endpoints, then change to the one with Docker Desktop in the description by running `docker context use xxx`*
 
+- Run `minikube status` to see if minikube is properly installed.
+
+![Minikube Status](images/minikube-status.png)
+
+**Step 2 - Set Up Kubernetes Config File**
+---
+
+- 
