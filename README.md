@@ -1,6 +1,9 @@
 # Kubernetes Demo
 ---
 
-*Placeholder text. Will update later*
+*This shows a simple kubernetes deployment on a local PC using minikube. A simple webapp and another express app are deployed*
 
-Took a break
+**Step 1 - Install Minikube on PC**
+
+---
+
