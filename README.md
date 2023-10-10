@@ -47,4 +47,28 @@ data:
 
 *Since the values of mongo secret are base64 encoded, you can't use plain text. Run `echo -n mongouser | base64` to convert the username to base64.*
 
--
+- Create a new file called `mongo.yaml`, which will be used to create deployment and service for mongodb.
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-deployment
+  labels:
+    app: mongo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo
+  template:
+    metadata:
+      labels:
+        app: mongo
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo:7.0.2
+        ports:
+        - containerPort: 27017
+```
