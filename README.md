@@ -176,3 +176,26 @@ env:
               key: mongo-url
 ```
 
+**Step 5 - Make webapp accessible via browser externally**
+---
+
+- Go to the service section of `webapp.yaml` and make the following additions:
+
+```
+spec:
+  *type: NodePort*
+  selector:
+    app: webapp
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+      *nodePort: 30100*
+```
+
+*The additions here are the NodePort type and the nodePort number. Those are responsible for exposing access to the webapp. a LoadBalancer type can also be used in place of NodePort, but for more than 1 instance typically.*
+
+*nodePort is set to 30100 because nodePort has a defined allowed port range. The port range is from 30000 to 32767*.
+
+
+
