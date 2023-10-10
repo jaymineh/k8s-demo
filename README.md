@@ -72,3 +72,23 @@ spec:
         ports:
         - containerPort: 27017
 ```
+
+- Create a service in `mongo.yaml`. This is done by segmenting the code in `mongo.yaml` and adding the code below:
+
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-service
+spec:
+  selector:
+    app: mongo
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
+```
+
+*Segmentation is done using a `---` at the end of the old code and beginning of the new code.*
+
+- 
