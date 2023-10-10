@@ -132,7 +132,7 @@ spec:
       targetPort: 3000
 ```
 
-**Step 4 - Create component to pass secret and configmap data into k8s pods.**
+**Step 4 - Create Component To Pass Secret And ConfigMap Data Into K8s Pods.**
 ---
 
 - Environment variables will be used here to properly pass the data into pods. Insert the code below into the bottom part of the deployment section of `mongo.yaml`.
@@ -176,7 +176,7 @@ env:
               key: mongo-url
 ```
 
-**Step 5 - Make webapp accessible via browser externally**
+**Step 5 - Make Webapp Accessible Via Browser Externally**
 ---
 
 - Go to the service section of `webapp.yaml` and make the following additions:
@@ -197,5 +197,29 @@ spec:
 
 *nodePort is set to 30100 because nodePort has a defined allowed port range. The port range is from 30000 to 32767*.
 
+**Step 6 - Deploy Resources Into Kubernetes Cluster**
+---
 
+*ConfigMap and Secret must exist before deployments are applied*
 
+- Run the `kubectl apply -f xxx` command in the following order:
+
+```
+mongo-config.yaml
+mongo-secret.yaml
+mongo.yaml
+webapp.yaml
+```
+
+**Step 7 - Confirm Pod Creation And Accessability**
+---
+
+- Run `kubectl get all` to see all running pods, services and deployments. Ensure the sttaus of the pods are **running.**
+
+*To get more details about a service or pod, you can use `kubectl describe svc <serviceName> or kubectl describe pod <podName>`*
+
+- After confirming the pods/nodes are up, run `kubectl get svc` to see the active NodePort. *According to previous configurations, it should be 30100.*
+
+- Run `minikube ip` or `kubectl get node -o wide` to get the IP address to be used with the port in the web browser.
+
+- On your web browser, type in the IP address gotten from the previous command and the port number. It should resolve the webapp landing page.
