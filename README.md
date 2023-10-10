@@ -223,3 +223,9 @@ webapp.yaml
 - Run `minikube ip` or `kubectl get node -o wide` to get the IP address to be used with the port in the web browser.
 
 - On your web browser, type in the IP address gotten from the previous command and the port number. It should resolve the webapp landing page.
+
+*If the IP and port are not reachable via browser, run `minikube service webapp-service` on your terminal and the browser will open with the page.*
+
+![Landing Page](images/success.png)
+
+**Project Complete**
