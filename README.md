@@ -19,4 +19,32 @@
 **Step 2 - Set Up Kubernetes Config File**
 ---
 
-- 
+*Templates on creating K8s config files can be found in the official kubernetes documentation*
+
+- Create config map file for K8s called `mongo-config`.
+
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongo-config
+data:
+  mongo-url: mongo-service
+```
+
+- Create another file called `mongo-secret`, which will hold the username and password for mongodb.
+
+```
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mongo-secret
+type: Opaque
+data:
+  mongo-user: bW9uZ291c2Vy
+  mongo-password: bW9uZ29wYXNzd29yZA==
+```
+
+*Since the values of mongo secret are base64 encoded, you can't use plain text. Run `echo -n mongouser | base64` to convert the username to base64.*
+
+-
