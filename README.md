@@ -132,3 +132,47 @@ spec:
       targetPort: 3000
 ```
 
+**Step 4 - Create component to pass secret and configmap data into k8s pods.**
+---
+
+- Environment variables will be used here to properly pass the data into pods. Insert the code below into the bottom part of the deployment section of `mongo.yaml`.
+
+```
+env:
+        - name: MONGO_INITDB_ROOT_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: mongo-user
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: mongo-password
+```
+
+*The webapp has already been configured to expect the above as environment variables*
+
+- Provide database info to the webapp.
+
+*The basic requirements to be provided to the webapp are the: database URL, login username and password*.
+
+```
+env:
+        - name: USER_NAME
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: mongo-user
+        - name: USER_PWD
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: mongo-password
+        - name: DB_URL
+          valueFrom:
+            configMapKeyRef:
+              name: mongo-config
+              key: mongo-url
+```
+
