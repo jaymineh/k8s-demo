@@ -91,4 +91,44 @@ spec:
 
 *Segmentation is done using a `---` at the end of the old code and beginning of the new code.*
 
-- 
+**Step 3 - Create Webapp Configuration**
+---
+
+- Insert the code below into a new file called `webapp.yaml` to create the deployment file for the demo app. *You can copy the current config in mongo.yaml and rework*.
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-deployment
+  labels:
+    app: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+      - name: webapp
+        image: nanajanashia/k8s-demo-app:v1.0
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-service
+spec:
+  selector:
+    app: web
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+```
+
