@@ -1,7 +1,7 @@
 # Kubernetes Demo
 ---
 
-*This shows a simple kubernetes deployment on a local PC using minikube. A simple webapp and another express app are deployed.*
+*This shows a simple kubernetes deployment on a local PC using minikube. A simple webapp and another express app are deployed. Complete files are in the `webapp` folder.*
 
 **Step 1 - Install Minikube on PC**
 ---
